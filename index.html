@@ -1,247 +1,264 @@
-<!-- Floating Top Bar with Image + PRO -->
-<div class="killer-top-bar">
-  <div class="brand-box">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – Dream11</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* animated username label */
+    .form-control {
+      position: relative;
+      margin: 20px 0 40px;
+      width: 100%;
+    }
+    .form-control input {
+      background: transparent;
+      border: 0;
+      border-bottom: 2px #fff solid;
+      display: block;
+      width: 100%;
+      padding: 15px 0;
+      font-size: 18px;
+      color: #fff;
+    }
+    .form-control input:focus,
+    .form-control input:valid {
+      outline: 0;
+      border-bottom-color: lightblue;
+    }
+    .form-control label {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      pointer-events: none;
+    }
+    .form-control label span {
+      display: inline-block;
+      font-size: 18px;
+      min-width: 5px;
+      color: #fff;
+      transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .form-control input:focus + label span,
+    .form-control input:valid + label span {
+      color: lightblue;
+      transform: translateY(-30px);
+    }
 
-    <!-- Brand Image -->
-    <img src="https://d13ir53smqqeyp.cloudfront.net/d11-static-pages/images/dream11LogoWhite.webp" class="brand-img" alt="Brand Logo">
+    /* Hide elements initially */
+    #loginContent {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#0d0d0d] to-[#111] text-white min-h-screen flex items-center justify-center">
 
-    <!-- PRO Text -->
-    <span class="pro-badge">PRO</span>
+  <!-- LOADING ANIMATION -->
+  <div id="loadingAnimation" class="flex items-center justify-center min-h-screen">
+    <div class="relative">
+      <div class="relative w-32 h-32">
+        <div
+          class="absolute w-full h-full rounded-full border-[3px] border-gray-100/10 border-r-[#0ff] border-b-[#0ff] animate-spin"
+          style="animation-duration: 3s;"
+        ></div>
 
+        <div
+          class="absolute w-full h-full rounded-full border-[3px] border-gray-100/10 border-t-[#0ff] animate-spin"
+          style="animation-duration: 2s; animation-direction: reverse;"
+        ></div>
+      </div>
+
+      <div
+        class="absolute inset-0 bg-gradient-to-tr from-[#0ff]/10 via-transparent to-[#0ff]/5 animate-pulse rounded-full blur-sm"
+      ></div>
+    </div>
   </div>
 
-  <a href="/login" class="login-btn">+ Login / Signup</a>
-</div>
+  <!-- LOGIN CONTENT -->
+  <div id="loginContent" class="w-full max-w-md mx-auto">
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl shadow-2xl p-8">
 
+      <!-- Logo -->
+      <div class="flex justify-center mb-8">
+        <img src="https://www.pngplay.com/wp-content/uploads/6/Dream11-Logo-PNG-Clipart-Background.png" class="h-20" alt="Dream11">
+      </div>
 
-<style>
-.killer-top-bar{
-  position: fixed;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 760px;
-  height: 62px;
-  background: linear-gradient(180deg, rgba(10,12,20,0.85), rgba(12,14,24,0.6));
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.05);
-  backdrop-filter: blur(8px) saturate(120%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-  box-shadow: 0 10px 26px rgba(0,0,0,0.45), 0 0 30px rgba(0,255,209,0.08);
-  z-index: 9999999;
-  -webkit-tap-highlight-color: transparent;
-}
+      <!-- Email / Pass -->
+      <form id="loginForm" class="space-y-4">
+        <input type="email" id="email" required placeholder="Email" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="password" id="pass" required placeholder="Password" class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-xl font-semibold transition">Log in</button>
+      </form>
 
-.brand-box{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+      <!-- Google -->
+      <button id="googleBtn" class="w-full mt-4 py-3 bg-white/10 hover:bg-white/20 rounded-xl font-semibold flex items-center justify-center gap-2 transition">
+        <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6167603 0 3.1012573.5535278 4.2863159 1.4740601l3.637146-3.4699707C17.8087769 1.1399536 15.0406494 0 12 0 7.392395 0 3.3966675 2.5999146 1.3858032 6.4098511l4.0444336 3.1929321C6.4099731 6.9193726 8.977478 5 12 5z"/><path fill="#34A853" d="M23.8960571 13.5018311C23.9585571 13.0101929 24 12.508667 24 12c0-.8578491-.093689-1.6931763-.2647705-2.5H12v5h6.4862061c-.5247192 1.3637695-1.4589844 2.5177612-2.6481934 3.319458l4.0594482 3.204834C22.0493774 19.135437 23.5219727 16.4903564 23.8960571 13.5018311z"/><path fill="#FBBC05" d="M5 12c0-.8434448.1568604-1.6483765.4302368-2.3972168L1.3858032 6.4098511C.5043335 8.0800171 0 9.9801636 0 12c0 1.9972534.4950562 3.8763428 1.3582153 5.532959l4.0495605-3.1970215C5.1484375 13.6044312 5 12.8204346 5 12z"/><path fill="#4285F4" d="M12 19c-3.0455322 0-5.6295776-1.9484863-6.5922241-4.6640625L1.3582153 17.532959C3.3592529 21.3734741 7.369812 24 12 24c3.027771 0 5.7887573-1.1248169 7.8974609-2.975708l-4.0594482-3.204834C14.7412109 18.5588989 13.4284058 19 12 19z"/></svg>
+        <span>Sign in with Google</span>
+      </button>
 
-.brand-img{
-  width: 115px;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
-}
+      <!-- Demo ID -->
+      <button id="demoBtn" class="w-full mt-3 py-3 bg-white/10 hover:bg-white/20 rounded-xl font-semibold">Use Demo ID</button>
 
-/* PRO badge */
-.pro-badge{
-  font-size: 14px;
-  font-weight: 800;
-  background: linear-gradient(90deg, #ff006a, #ff7e00);
-  padding: 3px 10px;
-  border-radius: 8px;
-  color: #fff;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  box-shadow: 0 0 12px rgba(255,0,98,0.35);
-}
+      <!-- Progress bar (hidden by default) -->
+      <div id="progressBar" class="hidden mt-4">
+        <div class="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+          <div class="h-full bg-blue-500 animate-pulse" style="width:0%" id="progressFill"></div>
+        </div>
+        <p id="progressText" class="text-center text-sm mt-2">Signing up...</p>
+      </div>
 
-.login-btn{
-  background: linear-gradient(90deg, rgba(122,95,255,0.22), rgba(0,255,209,0.18));
-  padding: 8px 14px;
-  border-radius: 12px;
-  font-size: 13px;
-  text-decoration: none;
-  font-weight: 700;
-  color: #fff;
-  transition: 0.25s;
-  border: 1px solid rgba(255,255,255,0.08);
-}
+      <!-- Username (hidden until needed) -->
+      <div id="usernameWrap" class="hidden mt-4">
+        <div class="form-control">
+          <input type="text" id="username" required>
+          <label>
+            <span style="transition-delay:0ms">U</span><span style="transition-delay:50ms">s</span><span style="transition-delay:100ms">e</span><span style="transition-delay:150ms">r</span><span style="transition-delay:200ms">n</span><span style="transition-delay:250ms">a</span><span style="transition-delay:300ms">m</span><span style="transition-delay:350ms">e</span>
+          </label>
+        </div>
+        <button id="continueBtn" class="w-full py-3 bg-green-600 hover:bg-green-700 rounded-xl font-semibold transition">Continue</button>
+      </div>
 
-.login-btn:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(122,95,255,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
-}
+    </div>
+  </div>
 
-@media (max-width:420px){
-  .killer-top-bar{ height: 56px; border-radius: 12px; }
-  .brand-img{ width: 90px; }
-  .pro-badge{ font-size: 11px; padding: 3px 8px; }
-  .login-btn{ padding:6px 10px; font-size:12px; }
-}
-</style>
-<!-- Floating full-width bottom nav with custom "killer" SVG icons. Paste this anywhere (no <body> wrapper required). -->
+  <script>
+    // DOM Elements
+    const loadingAnimation = document.getElementById('loadingAnimation');
+    const loginContent = document.getElementById('loginContent');
+    const loginForm   = document.getElementById('loginForm');
+    const googleBtn   = document.getElementById('googleBtn');
+    const demoBtn     = document.getElementById('demoBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill= document.getElementById('progressFill');
+    const progressText= document.getElementById('progressText');
+    const usernameWrap= document.getElementById('usernameWrap');
+    const usernameInp = document.getElementById('username');
+    const continueBtn = document.getElementById('continueBtn');
 
-<nav class="killer-bottom-nav" role="navigation" aria-label="Main">
-  <a class="nav-link" href="/site" aria-label="Home">
-    <!-- Home SVG -->
-    <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="g1" x1="0" x2="1">
-          <stop offset="0%" stop-color="#00ffd1"/>
-          <stop offset="100%" stop-color="#7A5FFF"/>
-        </linearGradient>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="blur" />
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <path d="M3 11.5L12 5l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V11.5z" fill="url(#g1)" filter="url(#glow)"/>
-    </svg>
-    <span class="nav-label">HOME</span>
-  </a>
+    let isDemo = false;
 
-  <a class="nav-link" href="/site" aria-label="Dashboard">
-    <!-- Dashboard SVG -->
-    <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="3" y="3" width="8" height="8" rx="1.2" fill="#fff" opacity="0.06"/>
-      <rect x="13" y="3" width="8" height="4" rx="1.2" fill="#fff" opacity="0.06"/>
-      <rect x="13" y="9" width="8" height="12" rx="1.2" fill="url(#g1)"/>
-      <rect x="3" y="13" width="8" height="8" rx="1.2" fill="url(#g1)" opacity="0.9"/>
-    </svg>
-    <span class="nav-label">DASHBOARD</span>
-  </a>
+    // Check if user is already logged in and redirect if not coming from logout
+    function checkExistingSession() {
+      // Check if user has any stored login data
+      const userKeys = Object.keys(localStorage).filter(key => key.startsWith('user_'));
+      
+      if (userKeys.length > 0 && !window.location.hash.includes('logout')) {
+        // User has previous login data and not coming from logout
+        const latestUserKey = userKeys[userKeys.length - 1];
+        const userData = JSON.parse(localStorage.getItem(latestUserKey));
+        
+        if (userData && userData.username) {
+          // Redirect to home page after a brief delay to show loading animation
+          setTimeout(() => {
+            const amt = userData.email.includes('demo') ? '199' : '150';
+            window.location.href = `/home#${userData.username}#${amt}`;
+          }, 800);
+          return true;
+        }
+      }
+      return false;
+    }
 
-  <a class="nav-link" href="/site" aria-label="Refrel">
-    <!-- Referral SVG -->
-    <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M17 11a4 4 0 1 0-6.9-2" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M7 13a3 3 0 1 0 0-6" stroke="#fff" stroke-opacity="0.6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <circle cx="18" cy="18" r="3" fill="url(#g1)"/>
-    </svg>
-    <span class="nav-label">REFREL</span>
-  </a>
+    // Initialize page
+    function init() {
+      // Show loading animation first
+      loadingAnimation.style.display = 'flex';
+      loginContent.style.display = 'none';
+      
+      // Check for existing session after a brief delay
+      setTimeout(() => {
+        const hasExistingSession = checkExistingSession();
+        
+        if (!hasExistingSession) {
+          // No existing session, show login form
+          loadingAnimation.style.display = 'none';
+          loginContent.style.display = 'block';
+        }
+      }, 1500);
+    }
 
-  <a class="nav-link" href="/site" aria-label="Withdrawl">
-    <!-- Withdraw SVG -->
-    <svg class="nav-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M21 12H7" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-      <path d="M17 8l4 4-4 4" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="nav-label">WITHDRAWL</span>
-  </a>
+    // Common redirect function
+    function goHome(user){
+      const amt = isDemo ? '199' : '150';
+      window.location.href = `/home#${user}#${amt}`;
+    }
 
-  <a class="nav-link cta" href="/deposit" aria-label="Deposit">
-    <!-- Deposit (big center) SVG -->
-    <svg class="nav-icon cta-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="g2" x1="0" x2="1">
-          <stop offset="0%" stop-color="#FF7A59"/>
-          <stop offset="100%" stop-color="#FF3AA7"/>
-        </linearGradient>
-      </defs>
-      <circle cx="24" cy="24" r="22" fill="url(#g2)"/>
-      <path d="M24 14v20M14 24h20" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span class="nav-label">DEPOSIT</span>
-  </a>
-</nav>
+    // Email/pass login
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const pass  = document.getElementById('pass').value.trim();
+      if(!email || !pass) return;
+      const key = `user_${email}`;
+      
+      if(!localStorage.getItem(key)){
+        // New user - sign up flow
+        localStorage.setItem(key, JSON.stringify({email, pass}));
+        showProgress();
+        setTimeout(()=>{
+          hideProgress();
+          askUsername(email);
+        },1200);
+      }else{
+        // Existing user - login flow
+        showProgress();
+        setTimeout(()=>{
+          const userData = JSON.parse(localStorage.getItem(key));
+          goHome(userData.username || email.split('@')[0]);
+        },800);
+      }
+    });
 
-<style>
-  .killer-bottom-nav {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 18px;
-    width: calc(100% - 28px);
-    max-width: 760px;
-    height: 72px;
-    background: linear-gradient(180deg, rgba(10,12,20,0.85), rgba(12,14,24,0.6));
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 14px;
-    gap: 6px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(122,95,255,0.08);
-    border: 1px solid rgba(255,255,255,0.04);
-    z-index: 9999999;
-    backdrop-filter: blur(6px) saturate(120%);
-    -webkit-tap-highlight-color: transparent;
-  }
+    // Google login
+    googleBtn.addEventListener('click', ()=>{
+      showProgress();
+      setTimeout(()=>{
+        hideProgress();
+        askUsername('google_user');
+      },2000);
+    });
 
-  .killer-bottom-nav .nav-link{
-    flex: 1 1 0;
-    height: 56px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    text-decoration: none;
-    color: rgba(255,255,255,0.85);
-    font-family: 'Segoe UI', system-ui, -apple-system;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.6px;
-    border-radius: 12px;
-    transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms;
-    position: relative;
-    overflow: visible;
-  }
+    // Demo login
+    demoBtn.addEventListener('click', ()=>{
+      isDemo = true;
+      showProgress();
+      setTimeout(()=>{
+        goHome('demo_user');
+      },800);
+    });
 
-  .killer-bottom-nav .nav-link:hover{transform: translateY(-4px);}
+    // Username ask function
+    function askUsername(prefix){
+      usernameWrap.classList.remove('hidden');
+      usernameInp.value = '';
+      usernameInp.focus();
+      continueBtn.onclick = ()=>{
+        const u = usernameInp.value.trim() || prefix.split('@')[0];
+        localStorage.setItem(`user_${prefix}`, JSON.stringify({email:prefix, username:u}));
+        goHome(u);
+      };
+    }
 
-  .nav-icon{width:22px;height:22px;display:block}
-  .nav-icon path, .nav-icon rect, .nav-icon circle{vector-effect: non-scaling-stroke}
+    // Progress helpers
+    function showProgress(){
+      progressBar.classList.remove('hidden');
+      let w = 0;
+      const t = setInterval(()=>{
+        w+=3;
+        progressFill.style.width = w+'%';
+        if(w>=100){clearInterval(t);}
+      },30);
+    }
+    
+    function hideProgress(){
+      progressBar.classList.add('hidden');
+      progressFill.style.width = '0%';
+    }
 
-  .nav-label{font-size:10px;color:rgba(255,255,255,0.75);}
+    // Initialize the application
+    init();
+  </script>
 
-  /* Center CTA styling */
-  .killer-bottom-nav .nav-link.cta{
-    flex: 0 0 86px;
-    transform: translateY(-10%);
-    margin-top: -4px;
-  }
-
-  .cta .cta-icon{width:56px;height:56px;filter: drop-shadow(0 6px 18px rgba(255,58,167,0.14)) drop-shadow(0 10px 40px rgba(255,122,89,0.06));}
-
-  /* Active state (based on pathname) */
-  .killer-bottom-nav .nav-link.active{
-    background: linear-gradient(90deg, rgba(122,95,255,0.12), rgba(0,255,209,0.06));
-    box-shadow: 0 8px 28px rgba(122,95,255,0.08), inset 0 1px 0 rgba(255,255,255,0.02);
-    color: #fff;
-    transform: translateY(-6px);
-  }
-
-  /* small screens tweak */
-  @media (max-width:420px){
-    .killer-bottom-nav{height:66px;padding:6px 8px;border-radius:12px}
-    .killer-bottom-nav .nav-link{height:48px;font-size:10px}
-    .killer-bottom-nav .nav-link.cta{flex-basis:72px}
-    .cta .cta-icon{width:48px;height:48px}
-  }
-</style>
-
-<script>
-  // Highlight active link using pathname (no hash). Falls back to first item.
-  (function(){
-    try{
-      const links = document.querySelectorAll('.killer-bottom-nav .nav-link');
-      const path = (location.pathname || '/').replace(/\/$/, '');
-      let matched = false;
-      links.forEach(a=>{
-        const href = (new URL(a.href, location.origin)).pathname.replace(/\/$/, '');
-        if(href === path){ a.classList.add('active'); matched = true; }
-        else a.classList.remove('active');
-      });
-      if(!matched && links[0]) links[0].classList.add('active');
-    }catch(e){console.warn('nav init', e)}
-  })();
-</script>
+</body>
+</html>
